@@ -212,59 +212,70 @@
             </p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Contact Info -->
-            <div class="space-y-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Contact Information Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 @if(isset($contactInfo))
                     @if($contactInfo['admin_name'])
-                    <div class="flex items-start">
-                        <div class="bg-slate-800 p-3 rounded-lg mr-4">
-                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Contact Person -->
+                    <div class="text-center">
+                        <div class="bg-slate-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </div>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-1">Contact Person</h3>
-                            <p class="text-slate-300">{{ $contactInfo['admin_name'] }}</p>
-                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Contact Person</h3>
+                        <p class="text-slate-300">{{ $contactInfo['admin_name'] }}</p>
                     </div>
                     @endif
                     
                     @if($contactInfo['admin_email'])
-                    <div class="flex items-start">
-                        <div class="bg-slate-800 p-3 rounded-lg mr-4">
-                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Email -->
+                    <div class="text-center">
+                        <div class="bg-slate-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-1">Email</h3>
-                            <a href="mailto:{{ $contactInfo['admin_email'] }}" class="text-slate-300 hover:text-white transition-colors">
-                                {{ $contactInfo['admin_email'] }}
-                            </a>
-                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Email</h3>
+                        <a href="mailto:{{ $contactInfo['admin_email'] }}" class="text-slate-300 hover:text-white transition-colors">
+                            {{ $contactInfo['admin_email'] }}
+                        </a>
                     </div>
                     @endif
+
+                    <!-- Telegram -->
+                    <div class="text-center">
+                        <div class="bg-slate-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Telegram</h3>
+                        <a href="https://t.me/kidsushiii" target="_blank" class="text-slate-300 hover:text-white transition-colors">
+                            @kidsushiii
+                        </a>
+                    </div>
                 @endif
             </div>
-            
-            <!-- Telegram Contact -->
-            <div class="bg-slate-800 p-8 rounded-2xl">
-                <h3 class="text-2xl font-bold mb-4">Quick Contact</h3>
-                <p class="text-slate-300 mb-6">
-                    For fastest response and instant support, contact us directly on Telegram. 
-                    We're here to help students and answer any questions!
-                </p>
-                
-                @if(isset($contactInfo) && $contactInfo['admin_telegram'])
-                <a href="https://t.me/{{ $contactInfo['admin_telegram'] }}" 
-                   class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center w-full justify-center">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                    </svg>
-                    Contact on Telegram
-                </a>
-                @endif
+
+            <!-- Quick Contact CTA -->
+            <div class="text-center">
+                <div class="bg-slate-800 p-8 rounded-2xl inline-block">
+                    <h3 class="text-xl font-bold mb-4">Quick Contact</h3>
+                    <p class="text-slate-300 mb-6 max-w-md">
+                        For fastest response and instant support, contact us directly on Telegram. 
+                        We're here to help students and answer any questions!
+                    </p>
+                    
+                    <a href="https://t.me/kidsushiii" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        Contact on Telegram
+                    </a>
+                </div>
             </div>
         </div>
     </div>
