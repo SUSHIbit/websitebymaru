@@ -58,10 +58,17 @@ class AdminSetting extends Model
         return static::getMultiple([
             'admin_name',
             'admin_email',
-            'admin_phone',
             'admin_telegram',
             'company_name',
             'company_address'
+        ]);
+    }
+
+    public static function getStats()
+    {
+        return static::getMultiple([
+            'projects_delivered',
+            'client_satisfaction'
         ]);
     }
 

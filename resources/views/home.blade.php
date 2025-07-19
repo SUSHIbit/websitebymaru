@@ -9,12 +9,12 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div class="text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Premium Web Development
-                <span class="block text-slate-300">Projects for Sale</span>
+                Student-Friendly Website
+                <span class="block text-slate-300">Projects & Source Code</span>
             </h1>
             <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Discover professionally crafted websites, e-commerce stores, and web applications. 
-                Ready-to-deploy solutions that save you time and deliver exceptional results.
+                Perfect for students and beginners! Get complete website source code with documentation. 
+                Learn while building your online presence affordably.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('services') }}" 
@@ -43,7 +43,7 @@
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why Choose Our Projects?</h2>
             <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                Every project is built with modern technologies, best practices, and attention to detail.
+                Every project comes with complete source code, perfect for students learning web development.
             </p>
         </div>
         
@@ -52,12 +52,12 @@
             <div class="text-center group">
                 <div class="bg-slate-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-slate-200 transition-colors">
                     <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900 mb-3">Ready to Deploy</h3>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Complete Source Code</h3>
                 <p class="text-slate-600">
-                    Complete source code with documentation. Set up and launch your project within hours, not weeks.
+                    Get full access to all code files with detailed comments. Perfect for learning and customization.
                 </p>
             </div>
             
@@ -65,12 +65,12 @@
             <div class="text-center group">
                 <div class="bg-slate-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-slate-200 transition-colors">
                     <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900 mb-3">Quality Assured</h3>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Student-Friendly</h3>
                 <p class="text-slate-600">
-                    Built with modern frameworks, responsive design, and following industry best practices for reliability.
+                    Affordable prices designed for students and beginners. Learn professional web development skills.
                 </p>
             </div>
             
@@ -83,7 +83,7 @@
                 </div>
                 <h3 class="text-xl font-semibold text-slate-900 mb-3">Full Support</h3>
                 <p class="text-slate-600">
-                    Comprehensive documentation and support included. Get help when you need it most.
+                    Get help when you need it! Comprehensive documentation and friendly support included.
                 </p>
             </div>
         </div>
@@ -96,26 +96,27 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                    Professional Web Solutions
+                    Learn by Building Real Projects
                 </h2>
                 <p class="text-lg text-slate-600 mb-6">
-                    We specialize in creating high-quality web projects that businesses can purchase and deploy immediately. 
-                    Each project is carefully crafted with modern technologies and designed to meet specific business needs.
+                    We create affordable website projects specifically for students and beginners who want to learn 
+                    web development. Each project includes complete source code, setup instructions, and detailed 
+                    documentation to help you understand how everything works.
                 </p>
                 <p class="text-lg text-slate-600 mb-8">
-                    From e-commerce stores to complex web applications, our projects come with complete source code, 
-                    documentation, and ongoing support to ensure your success.
+                    Whether you need a website for your assignment, small business, or personal project, 
+                    our source code packages provide everything you need to get started and learn along the way.
                 </p>
                 
                 <!-- Stats -->
                 <div class="grid grid-cols-2 gap-6">
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-slate-900">50+</div>
+                        <div class="text-3xl font-bold text-slate-900">{{ $stats['projects_delivered'] ?? '10' }}+</div>
                         <div class="text-slate-600">Projects Delivered</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-3xl font-bold text-slate-900">100%</div>
-                        <div class="text-slate-600">Client Satisfaction</div>
+                        <div class="text-3xl font-bold text-slate-900">{{ $stats['client_satisfaction'] ?? '95' }}%</div>
+                        <div class="text-slate-600">Happy Students</div>
                     </div>
                 </div>
             </div>
@@ -128,25 +129,25 @@
                             <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-slate-600">Complete source code with documentation</span>
+                            <span class="text-slate-600">Complete source code with comments</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-slate-600">Installation and setup instructions</span>
+                            <span class="text-slate-600">Step-by-step setup instructions</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-slate-600">Extended support and updates</span>
+                            <span class="text-slate-600">Friendly support via Telegram</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span class="text-slate-600">Commercial license included</span>
+                            <span class="text-slate-600">Student-friendly pricing</span>
                         </li>
                     </ul>
                 </div>
@@ -156,63 +157,36 @@
 </section>
 
 <!-- Services Overview -->
+@if($projectTypes && $projectTypes->count() > 0)
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Project Categories</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Available Project Categories</h2>
             <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                Explore our diverse range of professional web projects across different categories.
+                Explore our different types of website projects perfect for students and beginners.
             </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- E-commerce -->
+            @foreach($projectTypes as $projectType)
             <div class="bg-slate-50 p-8 rounded-xl hover:shadow-lg transition-all duration-200 group">
                 <div class="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 group-hover:bg-slate-300 transition-colors">
                     <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900 mb-3">E-commerce Stores</h3>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">{{ $projectType->name }}</h3>
                 <p class="text-slate-600 mb-4">
-                    Complete online stores with payment integration, inventory management, and customer accounts.
+                    {{ $projectType->description ?: 'Perfect projects for learning and building your skills.' }}
                 </p>
-                <a href="{{ route('services') }}?type=e-commerce-websites" class="text-slate-700 font-medium hover:text-slate-900 transition-colors">
-                    View Projects →
-                </a>
-            </div>
-            
-            <!-- Business Websites -->
-            <div class="bg-slate-50 p-8 rounded-xl hover:shadow-lg transition-all duration-200 group">
-                <div class="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 group-hover:bg-slate-300 transition-colors">
-                    <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                    </svg>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-slate-500">{{ $projectType->active_projects_count }} {{ Str::plural('project', $projectType->active_projects_count) }}</span>
+                    <a href="{{ route('services') }}?type={{ $projectType->slug }}" class="text-slate-700 font-medium hover:text-slate-900 transition-colors">
+                        View Projects →
+                    </a>
                 </div>
-                <h3 class="text-xl font-semibold text-slate-900 mb-3">Business Websites</h3>
-                <p class="text-slate-600 mb-4">
-                    Professional corporate websites with CMS, contact forms, and modern design.
-                </p>
-                <a href="{{ route('services') }}?type=business-websites" class="text-slate-700 font-medium hover:text-slate-900 transition-colors">
-                    View Projects →
-                </a>
             </div>
-            
-            <!-- Web Applications -->
-            <div class="bg-slate-50 p-8 rounded-xl hover:shadow-lg transition-all duration-200 group">
-                <div class="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 group-hover:bg-slate-300 transition-colors">
-                    <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-slate-900 mb-3">Web Applications</h3>
-                <p class="text-slate-600 mb-4">
-                    Custom web applications with advanced functionality and user management systems.
-                </p>
-                <a href="{{ route('services') }}?type=web-applications" class="text-slate-700 font-medium hover:text-slate-900 transition-colors">
-                    View Projects →
-                </a>
-            </div>
+            @endforeach
         </div>
         
         <div class="text-center mt-12">
@@ -226,6 +200,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <!-- Contact Section -->
 <section id="contact" class="py-20 bg-slate-900 text-white">
@@ -233,7 +208,7 @@
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
             <p class="text-xl text-slate-300 max-w-2xl mx-auto">
-                Ready to purchase a project or have questions? Contact us directly through Telegram for instant support.
+                Have questions about our projects? Need help with customization? Contact us for friendly support!
             </p>
         </div>
         
@@ -270,22 +245,6 @@
                         </div>
                     </div>
                     @endif
-                    
-                    @if($contactInfo['admin_phone'])
-                    <div class="flex items-start">
-                        <div class="bg-slate-800 p-3 rounded-lg mr-4">
-                            <svg class="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-1">Phone</h3>
-                            <a href="tel:{{ $contactInfo['admin_phone'] }}" class="text-slate-300 hover:text-white transition-colors">
-                                {{ $contactInfo['admin_phone'] }}
-                            </a>
-                        </div>
-                    </div>
-                    @endif
                 @endif
             </div>
             
@@ -294,7 +253,7 @@
                 <h3 class="text-2xl font-bold mb-4">Quick Contact</h3>
                 <p class="text-slate-300 mb-6">
                     For fastest response and instant support, contact us directly on Telegram. 
-                    We're available to answer questions and process orders quickly.
+                    We're here to help students and answer any questions!
                 </p>
                 
                 @if(isset($contactInfo) && $contactInfo['admin_telegram'])
@@ -315,10 +274,10 @@
 <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Ready to Get Started?
+            Ready to Start Learning?
         </h2>
         <p class="text-xl text-slate-600 mb-8">
-            Browse our collection of premium web projects and find the perfect solution for your business needs.
+            Browse our collection of student-friendly website projects and start building your skills today!
         </p>
         <a href="{{ route('services') }}" 
            class="bg-slate-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-200 transform hover:scale-105 inline-flex items-center">

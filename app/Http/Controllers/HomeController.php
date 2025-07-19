@@ -12,8 +12,14 @@ class HomeController extends Controller
     public function index()
     {
         $contactInfo = AdminSetting::getContactInfo();
+        $stats = AdminSetting::getStats();
+        $projectTypes = ProjectType::active()
+            ->withCount('activeProjects')
+            ->having('active_projects_count', '>', 0)
+            ->limit(6)
+            ->get();
         
-        return view('home', compact('contactInfo'));
+        return view('home', compact('contactInfo', 'stats', 'projectTypes'));
     }
 
     public function services(Request $request)

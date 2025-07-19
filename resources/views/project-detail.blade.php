@@ -18,7 +18,6 @@
             <span class="text-white">{{ $project->title }}</span>
         </div>
         
-        <!-- 1. Title -->
         <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ $project->title }}</h1>
         
         <div class="flex flex-wrap items-center gap-4">
@@ -35,7 +34,7 @@
 <!-- Project Content -->
 <section class="py-12 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- 2. Description -->
+        <!-- Project Description -->
         <div class="prose prose-lg prose-slate max-w-none mb-12">
             <div class="bg-slate-50 p-8 rounded-xl">
                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Project Description</h2>
@@ -43,14 +42,35 @@
             </div>
         </div>
 
-        <!-- 3. Price (Highlighted) -->
+        <!-- Website Link -->
+        @if($project->website_link)
+        <div class="bg-blue-50 border border-blue-200 p-8 rounded-xl mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                Live Demo
+            </h2>
+            <p class="text-slate-700 mb-4">Check out the live demo of this project to see how it works:</p>
+            <a href="{{ $project->website_link }}" 
+               target="_blank" 
+               class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                View Live Demo
+            </a>
+        </div>
+        @endif
+
+        <!-- Price (Highlighted) -->
         <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-8 rounded-xl mb-12 text-center">
             <h2 class="text-2xl font-bold mb-2">Project Price</h2>
             <div class="text-5xl font-bold mb-4">{{ $project->formatted_price }}</div>
-            <p class="text-slate-300">One-time purchase with full source code and support</p>
+            <p class="text-slate-300">One-time purchase with complete source code and support</p>
         </div>
 
-        <!-- 4. What You Will Get -->
+        <!-- What You Will Get -->
         @if($project->what_you_get && count($project->what_you_get) > 0)
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-slate-900 mb-6">What You Will Get</h2>
@@ -69,7 +89,7 @@
         </div>
         @endif
 
-        <!-- 5. Key Features -->
+        <!-- Key Features -->
         @if($project->key_features && count($project->key_features) > 0)
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-slate-900 mb-6">Key Features</h2>
@@ -86,21 +106,19 @@
         </div>
         @endif
 
-        <!-- 6. Images Section (Sequential Display) -->
+        <!-- Images Section -->
         @if($project->images && $project->images->count() > 0)
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-slate-900 mb-8">Project Gallery</h2>
             <div class="space-y-12">
                 @foreach($project->images as $image)
                 <div class="bg-slate-50 rounded-xl overflow-hidden">
-                    <!-- Image -->
                     <div class="aspect-video bg-slate-200">
                         <img src="{{ $image->image_url }}" 
                              alt="{{ $image->description ?: $project->title }}"
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
                     
-                    <!-- Image Description -->
                     @if($image->description)
                     <div class="p-6">
                         <p class="text-slate-700 text-lg leading-relaxed">{{ $image->description }}</p>
@@ -112,11 +130,11 @@
         </div>
         @endif
 
-        <!-- 7. Buy Project Button -->
+        <!-- Buy Project Button -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-8 rounded-xl text-center text-white mb-12">
             <h2 class="text-2xl font-bold mb-4">Ready to Purchase?</h2>
             <p class="text-blue-100 mb-6 text-lg">
-                Get instant access to the complete project with full source code, documentation, and support.
+                Get instant access to the complete project with source code, documentation, and friendly support.
             </p>
             <a href="{{ $project->telegram_buy_link }}" 
                target="_blank"
@@ -144,7 +162,6 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($relatedProjects as $relatedProject)
             <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <!-- Project Image -->
                 <div class="relative h-48 bg-slate-200 overflow-hidden">
                     @if($relatedProject->main_image_url)
                         <img src="{{ $relatedProject->main_image_url }}" 
@@ -158,7 +175,6 @@
                         </div>
                     @endif
                     
-                    <!-- Price Badge -->
                     <div class="absolute top-4 right-4">
                         <span class="bg-slate-900/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold">
                             {{ $relatedProject->formatted_price }}
@@ -166,7 +182,6 @@
                     </div>
                 </div>
                 
-                <!-- Project Info -->
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
                         {{ $relatedProject->title }}
@@ -176,7 +191,6 @@
                         {{ $relatedProject->short_description }}
                     </p>
                     
-                    <!-- Action Button -->
                     <a href="{{ route('project.detail', $relatedProject->slug) }}" 
                        class="bg-slate-900 text-white px-6 py-2 rounded-lg font-medium hover:bg-slate-800 transition-colors inline-block">
                         View Details

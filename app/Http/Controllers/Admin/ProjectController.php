@@ -40,6 +40,7 @@ class ProjectController extends Controller
             'project_type_id' => 'required|exists:project_types,id',
             'is_active' => 'boolean',
             'telegram_username' => 'nullable|string|max:100',
+            'website_link' => 'nullable|url|max:255',
             'images' => 'nullable|array|max:20',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'image_descriptions' => 'nullable|array',
@@ -55,7 +56,8 @@ class ProjectController extends Controller
             'key_features' => array_filter($request->key_features ?? []),
             'project_type_id' => $request->project_type_id,
             'is_active' => $request->has('is_active'),
-            'telegram_username' => $request->telegram_username
+            'telegram_username' => $request->telegram_username,
+            'website_link' => $request->website_link
         ]);
 
         // Handle image uploads
@@ -103,6 +105,7 @@ class ProjectController extends Controller
             'project_type_id' => 'required|exists:project_types,id',
             'is_active' => 'boolean',
             'telegram_username' => 'nullable|string|max:100',
+            'website_link' => 'nullable|url|max:255',
             'new_images' => 'nullable|array|max:20',
             'new_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'new_image_descriptions' => 'nullable|array',
@@ -118,7 +121,8 @@ class ProjectController extends Controller
             'key_features' => array_filter($request->key_features ?? []),
             'project_type_id' => $request->project_type_id,
             'is_active' => $request->has('is_active'),
-            'telegram_username' => $request->telegram_username
+            'telegram_username' => $request->telegram_username,
+            'website_link' => $request->website_link
         ]);
 
         // Handle new image uploads

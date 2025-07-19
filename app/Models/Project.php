@@ -20,7 +20,8 @@ class Project extends Model
         'key_features',
         'project_type_id',
         'is_active',
-        'telegram_username'
+        'telegram_username',
+        'website_link'
     ];
 
     protected $casts = [
@@ -70,13 +71,13 @@ class Project extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return '$' . number_format($this->price, 2);
+        return 'RM ' . number_format($this->price, 2);
     }
 
     public function getTelegramBuyLinkAttribute()
     {
         $telegramUsername = $this->telegram_username ?: config('app.default_telegram');
-        $message = "Hello, I would like to buy " . $this->title;
+        $message = "Hello, I'm interested in " . $this->title . ". Is it still available?";
         return "https://t.me/{$telegramUsername}?text=" . urlencode($message);
     }
 

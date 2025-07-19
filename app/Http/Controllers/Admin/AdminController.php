@@ -24,7 +24,15 @@ class AdminController extends Controller
 
     public function settings()
     {
-        $settings = AdminSetting::getContactInfo();
+        $settings = AdminSetting::getMultiple([
+            'admin_name',
+            'admin_email',
+            'admin_telegram',
+            'company_name',
+            'company_address',
+            'projects_delivered',
+            'client_satisfaction'
+        ]);
         
         return view('admin.settings', compact('settings'));
     }
@@ -34,13 +42,22 @@ class AdminController extends Controller
         $request->validate([
             'admin_name' => 'required|string|max:255',
             'admin_email' => 'required|email|max:255',
-            'admin_phone' => 'nullable|string|max:20',
             'admin_telegram' => 'nullable|string|max:100',
             'company_name' => 'nullable|string|max:255',
-            'company_address' => 'nullable|string|max:500'
+            'company_address' => 'nullable|string|max:500',
+            'projects_delivered' => 'required|integer|min:0',
+            'client_satisfaction' => 'required|integer|min:0|max:100'
         ]);
 
-        foreach ($request->only(['admin_name', 'admin_email', 'admin_phone', 'admin_telegram', 'company_name', 'company_address']) as $key => $value) {
+        foreach ($request->only([
+            'admin_name', 
+            'admin_email', 
+            'admin_telegram', 
+            'company_name', 
+            'company_address',
+            'projects_delivered',
+            'client_satisfaction'
+        ]) as $key => $value) {
             AdminSetting::set($key, $value);
         }
 

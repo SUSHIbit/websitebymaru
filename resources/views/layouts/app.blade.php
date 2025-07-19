@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Professional Web Development Projects' }} - {{ config('app.name', 'Project Showcase') }}</title>
+    <title>{{ $title ?? 'Student-Friendly Web Development Projects' }} - {{ config('app.name', 'WebsiteByMaru') }}</title>
     
-    <meta name="description" content="{{ $description ?? 'Discover premium web development projects and solutions. Professional websites, e-commerce stores, and web applications ready for purchase.' }}">
-    <meta name="keywords" content="web development, websites for sale, e-commerce, web applications, professional websites">
+    <meta name="description" content="{{ $description ?? 'Affordable web development projects perfect for students and small businesses. Get complete source code and learn while building your online presence.' }}">
+    <meta name="keywords" content="student websites, affordable web development, website source code, beginner-friendly projects">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,7 +28,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="{{ route('home') }}" class="text-2xl font-bold text-slate-900 hover:text-slate-700 transition-colors">
-                        Project<span class="text-slate-600">Showcase</span>
+                        Website<span class="text-slate-600">ByMaru</span>
                     </a>
                 </div>
 
@@ -39,12 +39,12 @@
                            class="nav-link {{ request()->routeIs('home') ? 'text-slate-900 border-b-2 border-slate-900' : 'text-slate-600 hover:text-slate-900' }}">
                             Home
                         </a>
-                        <a href="{{ route('services') }}" 
-                           class="nav-link {{ request()->routeIs('services') ? 'text-slate-900 border-b-2 border-slate-900' : 'text-slate-600 hover:text-slate-900' }}">
-                            Projects
-                        </a>
                         <a href="{{ route('home') }}#about" class="nav-link text-slate-600 hover:text-slate-900">
                             About
+                        </a>
+                        <a href="{{ route('services') }}" 
+                           class="nav-link {{ request()->routeIs('services') || request()->routeIs('project.detail') ? 'text-slate-900 border-b-2 border-slate-900' : 'text-slate-600 hover:text-slate-900' }}">
+                            Projects
                         </a>
                         <a href="{{ route('home') }}#contact" class="nav-link text-slate-600 hover:text-slate-900">
                             Contact
@@ -68,8 +68,8 @@
         <div id="mobile-menu" class="md:hidden hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-slate-200">
                 <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'bg-slate-100 text-slate-900' : 'text-slate-600' }}">Home</a>
-                <a href="{{ route('services') }}" class="mobile-nav-link {{ request()->routeIs('services') ? 'bg-slate-100 text-slate-900' : 'text-slate-600' }}">Projects</a>
                 <a href="{{ route('home') }}#about" class="mobile-nav-link text-slate-600">About</a>
+                <a href="{{ route('services') }}" class="mobile-nav-link {{ request()->routeIs('services') || request()->routeIs('project.detail') ? 'bg-slate-100 text-slate-900' : 'text-slate-600' }}">Projects</a>
                 <a href="{{ route('home') }}#contact" class="mobile-nav-link text-slate-600">Contact</a>
             </div>
         </div>
@@ -86,9 +86,10 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Company Info -->
                 <div class="col-span-1 md:col-span-2">
-                    <h3 class="text-2xl font-bold text-white mb-4">Project<span class="text-slate-400">Showcase</span></h3>
+                    <h3 class="text-2xl font-bold text-white mb-4">Website<span class="text-slate-400">ByMaru</span></h3>
                     <p class="text-slate-400 mb-4 max-w-md">
-                        Professional web development projects and solutions. High-quality websites, applications, and digital experiences ready for purchase.
+                        Student-friendly web development projects with complete source code. 
+                        Perfect for learning and building your online presence affordably.
                     </p>
                     @if(isset($contactInfo))
                     <div class="space-y-2">
@@ -101,14 +102,6 @@
                             {{ $contactInfo['admin_email'] }}
                         </p>
                         @endif
-                        @if($contactInfo['admin_phone'])
-                        <p class="flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                            </svg>
-                            {{ $contactInfo['admin_phone'] }}
-                        </p>
-                        @endif
                     </div>
                     @endif
                 </div>
@@ -118,8 +111,8 @@
                     <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2">
                         <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="{{ route('services') }}" class="hover:text-white transition-colors">Projects</a></li>
                         <li><a href="{{ route('home') }}#about" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="{{ route('services') }}" class="hover:text-white transition-colors">Projects</a></li>
                         <li><a href="{{ route('home') }}#contact" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
@@ -141,7 +134,7 @@
 
             <!-- Bottom Footer -->
             <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-                <p>&copy; {{ date('Y') }} {{ $contactInfo['company_name'] ?? 'Project Showcase' }}. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} {{ $contactInfo['company_name'] ?? 'WebsiteByMaru' }}. All rights reserved.</p>
             </div>
         </div>
     </footer>

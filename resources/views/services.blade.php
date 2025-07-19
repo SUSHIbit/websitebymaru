@@ -5,9 +5,9 @@
 <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Premium Web Projects</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Website Projects for Students</h1>
             <p class="text-xl text-slate-300 max-w-2xl mx-auto">
-                Discover our collection of professionally crafted websites and web applications ready for purchase.
+                Discover our collection of affordable website projects with complete source code, perfect for learning and assignments.
             </p>
         </div>
     </div>
@@ -16,24 +16,32 @@
 <!-- Filter Section -->
 <section class="py-8 bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center space-x-2">
-                <span class="text-slate-600 font-medium">Filter by category:</span>
+        <div class="bg-slate-50 p-6 rounded-xl">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <h3 class="text-lg font-semibold text-slate-900">Filter by Category</h3>
+                <div class="text-sm text-slate-600">
+                    {{ $projects->total() }} {{ Str::plural('project', $projects->total()) }} found
+                </div>
             </div>
             
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-3">
                 <a href="{{ route('services') }}" 
                    class="filter-btn {{ $selectedType === 'all' ? 'active' : '' }}">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
                     All Projects
+                    <span class="ml-2 bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full text-xs">{{ $projects->total() }}</span>
                 </a>
                 
                 @foreach($projectTypes as $type)
                 <a href="{{ route('services') }}?type={{ $type->slug }}" 
                    class="filter-btn {{ $selectedType === $type->slug ? 'active' : '' }}">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                    </svg>
                     {{ $type->name }}
-                    <span class="ml-1 text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">
-                        {{ $type->active_projects_count }}
-                    </span>
+                    <span class="ml-2 bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full text-xs">{{ $type->active_projects_count }}</span>
                 </a>
                 @endforeach
             </div>
@@ -102,7 +110,6 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
                         @endif
                         
                         <!-- Action Buttons -->
@@ -167,7 +174,7 @@
             Need a Custom Project?
         </h2>
         <p class="text-xl text-slate-600 mb-8">
-            Don't see exactly what you're looking for? Contact us for custom development solutions tailored to your specific needs.
+            Don't see exactly what you need for your assignment or project? Contact us for custom development solutions tailored to your requirements.
         </p>
         @if(isset($contactInfo) && $contactInfo['admin_telegram'])
         <a href="https://t.me/{{ $contactInfo['admin_telegram'] }}?text=Hello, I'm interested in a custom project" 
@@ -186,15 +193,15 @@
 @push('head')
 <style>
 .filter-btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 border-2;
+    @apply inline-flex items-center px-4 py-3 rounded-lg font-medium transition-all duration-200 border-2 shadow-sm;
 }
 
 .filter-btn:not(.active) {
-    @apply bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50;
+    @apply bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-md;
 }
 
 .filter-btn.active {
-    @apply bg-slate-900 text-white border-slate-900;
+    @apply bg-slate-900 text-white border-slate-900 shadow-lg;
 }
 
 .line-clamp-3 {

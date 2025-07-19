@@ -39,7 +39,7 @@
                            id="title" 
                            value="{{ old('title', $project->title) }}"
                            class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors @error('title') border-red-500 @enderror"
-                           placeholder="Modern E-commerce Store"
+                           placeholder="Student Portfolio Website"
                            required>
                     @error('title')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -54,7 +54,7 @@
                               id="short_description" 
                               rows="3"
                               class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors @error('short_description') border-red-500 @enderror"
-                              placeholder="Brief description that appears in project listings..."
+                              placeholder="Perfect for students who need a professional portfolio website..."
                               required>{{ old('short_description', $project->short_description) }}</textarea>
                     @error('short_description')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -69,7 +69,7 @@
                               id="long_description" 
                               rows="8"
                               class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors @error('long_description') border-red-500 @enderror"
-                              placeholder="Detailed description of the project, its features, technologies used, and benefits..."
+                              placeholder="Detailed description of the project, technologies used, perfect for students..."
                               required>{{ old('long_description', $project->long_description) }}</textarea>
                     @error('long_description')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -100,10 +100,10 @@
 
                     <!-- Price -->
                     <div>
-                        <label for="price" class="block text-sm font-medium text-slate-700 mb-2">Price *</label>
+                        <label for="price" class="block text-sm font-medium text-slate-700 mb-2">Price (RM) *</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-slate-500 sm:text-sm">$</span>
+                                <span class="text-slate-500 sm:text-sm">RM</span>
                             </div>
                             <input type="number" 
                                    name="price" 
@@ -111,15 +111,30 @@
                                    step="0.01"
                                    min="0"
                                    value="{{ old('price', $project->price) }}"
-                                   class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors pl-8 @error('price') border-red-500 @enderror"
-                                   placeholder="2500.00"
+                                   class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors pl-12 @error('price') border-red-500 @enderror"
+                                   placeholder="50.00"
                                    required>
                         </div>
                         @error('price')
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
-                        <p class="text-slate-500 text-sm mt-1">Project price in USD (e.g., 2500.00).</p>
+                        <p class="text-slate-500 text-sm mt-1">Project price in Malaysian Ringgit (e.g., 50.00).</p>
                     </div>
+                </div>
+
+                <!-- Website Link -->
+                <div>
+                    <label for="website_link" class="block text-sm font-medium text-slate-700 mb-2">Live Demo Link (Optional)</label>
+                    <input type="url" 
+                           name="website_link" 
+                           id="website_link" 
+                           value="{{ old('website_link', $project->website_link) }}"
+                           class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors @error('website_link') border-red-500 @enderror"
+                           placeholder="https://demo.example.com">
+                    @error('website_link')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                    <p class="text-slate-500 text-sm mt-1">Optional link to a live demo of this project.</p>
                 </div>
 
                 <!-- Telegram Username -->
@@ -160,8 +175,8 @@
         <!-- What You Get -->
         <div class="bg-white shadow rounded-lg">
             <div class="px-6 py-4 border-b border-slate-200">
-                <h3 class="text-lg font-medium text-slate-900">What You Get</h3>
-                <p class="mt-1 text-sm text-slate-500">List what customers will receive when they purchase this project.</p>
+                <h3 class="text-lg font-medium text-slate-900">What Students Will Get</h3>
+                <p class="mt-1 text-sm text-slate-500">List what students will receive when they purchase this project.</p>
             </div>
             
             <div class="p-6">
@@ -172,7 +187,7 @@
                             <input type="text" 
                                    name="what_you_get[]" 
                                    class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors flex-1"
-                                   placeholder="What customers will receive..."
+                                   placeholder="What students will receive..."
                                    value="{{ old('what_you_get.'.$index, $item) }}">
                             <button type="button" onclick="removeItem(this)" class="text-red-600 hover:text-red-700 p-2 flex-shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -239,9 +254,9 @@
                             <button type="button" onclick="removeItem(this)" class="text-red-600 hover:text-red-700 p-2 flex-shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                        </button>
-                    </div>
+                                </svg>
+                            </button>
+                        </div>
                     @endif
                 </div>
                 <button type="button" onclick="addKeyFeatureItem()" class="mt-3 text-slate-600 hover:text-slate-900 flex items-center">
@@ -279,15 +294,15 @@
                                 Image {{ $image->sort_order }}
                                 @endif
                             </span>
-                        <button type="button" 
-                                data-image-id="{{ $image->id }}"
-                                onclick="removeExistingImage(this.getAttribute('data-image-id'))"
-                                class="text-red-600 hover:text-red-800 text-sm flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                            Remove
-                        </button>
+                            <button type="button" 
+                                    data-image-id="{{ $image->id }}"
+                                    onclick="removeExistingImage(this.getAttribute('data-image-id'))"
+                                    class="text-red-600 hover:text-red-800 text-sm flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                                Remove
+                            </button>
                         </div>
                     </div>
                     @endforeach
@@ -346,7 +361,7 @@ function addWhatYouGetItem() {
         <input type="text" 
                name="what_you_get[]" 
                class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-slate-500 focus:ring-slate-500 transition-colors flex-1"
-               placeholder="What customers will receive...">
+               placeholder="What students will receive...">
         <button type="button" onclick="removeItem(this)" class="text-red-600 hover:text-red-700 p-2 flex-shrink-0">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
