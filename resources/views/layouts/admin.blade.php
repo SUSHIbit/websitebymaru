@@ -91,17 +91,20 @@
         <!-- Mobile sidebar overlay -->
         <div id="mobile-overlay" class="fixed inset-0 z-50 lg:hidden hidden">
             <div class="fixed inset-0 bg-black/50" onclick="toggleMobileSidebar()"></div>
-            <aside class="fixed left-0 top-0 h-full w-64 bg-white">
-                <div class="flex flex-col h-full">
-                    <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200">
-                        <h1 class="text-lg font-semibold">Admin Panel</h1>
-                        <button onclick="toggleMobileSidebar()" class="action-button">
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <nav class="flex-1 p-4 space-y-1">
+            <aside class="fixed left-0 top-0 h-full w-64 bg-white flex flex-col">
+                <!-- Mobile Sidebar Header -->
+                <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200 flex-shrink-0">
+                    <h1 class="text-lg font-semibold">Admin Panel</h1>
+                    <button onclick="toggleMobileSidebar()" class="action-button">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Sidebar Content - Scrollable -->
+                <div class="flex-1 overflow-y-auto">
+                    <nav class="p-4 space-y-1">
                         <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
@@ -130,6 +133,30 @@
                         </a>
                     </nav>
                 </div>
+
+                <!-- Mobile Sidebar Footer - Fixed at bottom -->
+                <div class="p-4 border-t border-slate-200 flex-shrink-0">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="avatar">
+                            <div class="avatar-fallback text-sm font-medium">
+                                {{ substr(Auth::user()->name, 0, 1) }}
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium truncate">{{ Auth::user()->name }}</p>
+                            <p class="text-xs text-muted-foreground truncate">{{ Auth::user()->email }}</p>
+                        </div>
+                    </div>
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center gap-2 px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors text-sm">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                            Logout
+                        </button>
+                    </form>
+                </div>
             </aside>
         </div>
 
@@ -139,7 +166,7 @@
             <header class="admin-header">
                 <div class="flex items-center justify-between h-16 px-6">
                     <div class="flex items-center gap-4">
-                        <button onclick="toggleMobileSidebar()" class="action-button lg:hidden">
+                        <button id="mobile-menu-button" onclick="toggleMobileSidebar()" class="action-button lg:hidden">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                             </svg>
@@ -188,8 +215,28 @@
 
     <script>
         function toggleMobileSidebar() {
-            document.getElementById('mobile-overlay').classList.toggle('hidden');
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.toggle('hidden');
+            
+            if (!overlay.classList.contains('hidden')) {
+                document.body.classList.add('overflow-hidden');
+            } else {
+                document.body.classList.remove('overflow-hidden');
+            }
         }
+
+        function closeMobileSidebar() {
+            const overlay = document.getElementById('mobile-overlay');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Close sidebar when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) {
+                closeMobileSidebar();
+            }
+        });
 
         // Auto-hide flash messages
         setTimeout(() => {
@@ -204,3 +251,62 @@
     @stack('scripts')
 </body>
 </html>
+
+<style>
+/* Prevent body scroll when mobile sidebar is open */
+body.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Mobile sidebar animations */
+#mobile-overlay {
+    animation: fadeIn 0.2s ease-out;
+}
+
+#mobile-overlay aside {
+    animation: slideInFromLeft 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+    from { 
+        transform: translateX(-100%); 
+    }
+    to { 
+        transform: translateX(0); 
+    }
+}
+
+/* Ensure mobile sidebar takes full height and is scrollable */
+#mobile-overlay aside {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+/* Scrollable content area */
+#mobile-overlay .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+#mobile-overlay .overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+}
+
+#mobile-overlay .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#mobile-overlay .overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+#mobile-overlay .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+</style>
