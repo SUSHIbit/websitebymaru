@@ -66,7 +66,8 @@ class Project extends Model
     public function getMainImageUrlAttribute()
     {
         $mainImage = $this->mainImage;
-        return $mainImage ? asset('storage/' . $mainImage->image_path) : null;
+        // Return asset URL instead of storage URL
+        return $mainImage ? asset($mainImage->image_path) : null;
     }
 
     public function getFormattedPriceAttribute()
@@ -76,7 +77,7 @@ class Project extends Model
 
     public function getTelegramBuyLinkAttribute()
     {
-        $telegramUsername = $this->telegram_username ?: config('app.default_telegram');
+        $telegramUsername = $this->telegram_username ?: 'kidsushiii'; // fallback username
         $message = "Hello, I'm interested in " . $this->title . ". Is it still available?";
         return "https://t.me/{$telegramUsername}?text=" . urlencode($message);
     }

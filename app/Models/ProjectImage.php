@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProjectImage extends Model
 {
@@ -33,8 +33,10 @@ class ProjectImage extends Model
         });
 
         static::deleting(function ($image) {
-            if (Storage::disk('public')->exists($image->image_path)) {
-                Storage::disk('public')->delete($image->image_path);
+            // Delete from public directory instead of storage
+            $imagePath = public_path($image->image_path);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
             }
         });
     }
@@ -46,7 +48,8 @@ class ProjectImage extends Model
 
     public function getImageUrlAttribute()
     {
-        return asset('storage/' . $this->image_path);
+        // Return asset URL instead of storage URL
+        return asset($this->image_path);
     }
 
     public function getIsMainImageAttribute()

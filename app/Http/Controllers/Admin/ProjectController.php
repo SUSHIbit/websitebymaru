@@ -7,8 +7,8 @@ use App\Models\Project;
 use App\Models\ProjectType;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -60,14 +60,27 @@ class ProjectController extends Controller
             'website_link' => $request->website_link
         ]);
 
-        // Handle image uploads
+        // Handle image uploads - store directly in public folder
         if ($request->hasFile('images')) {
+            // Create project directory in public/images/projects/
+            $projectDir = public_path("images/projects/{$project->id}");
+            if (!File::exists($projectDir)) {
+                File::makeDirectory($projectDir, 0755, true);
+            }
+
             foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('projects/' . $project->id, 'public');
+                // Generate unique filename
+                $filename = time() . '_' . $index . '.' . $image->getClientOriginalExtension();
+                
+                // Move image to public directory
+                $image->move($projectDir, $filename);
+                
+                // Store relative path in database
+                $relativePath = "images/projects/{$project->id}/{$filename}";
                 
                 ProjectImage::create([
                     'project_id' => $project->id,
-                    'image_path' => $path,
+                    'image_path' => $relativePath,
                     'description' => $request->image_descriptions[$index] ?? null,
                     'sort_order' => $index + 1
                 ]);
@@ -127,14 +140,27 @@ class ProjectController extends Controller
 
         // Handle new image uploads
         if ($request->hasFile('new_images')) {
+            // Create project directory if it doesn't exist
+            $projectDir = public_path("images/projects/{$project->id}");
+            if (!File::exists($projectDir)) {
+                File::makeDirectory($projectDir, 0755, true);
+            }
+
             $maxOrder = $project->images()->max('sort_order') ?? 0;
             
             foreach ($request->file('new_images') as $index => $image) {
-                $path = $image->store('projects/' . $project->id, 'public');
+                // Generate unique filename
+                $filename = time() . '_' . ($maxOrder + $index + 1) . '.' . $image->getClientOriginalExtension();
+                
+                // Move image to public directory
+                $image->move($projectDir, $filename);
+                
+                // Store relative path in database
+                $relativePath = "images/projects/{$project->id}/{$filename}";
                 
                 ProjectImage::create([
                     'project_id' => $project->id,
-                    'image_path' => $path,
+                    'image_path' => $relativePath,
                     'description' => $request->new_image_descriptions[$index] ?? null,
                     'sort_order' => $maxOrder + $index + 1
                 ]);
@@ -146,11 +172,18 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        // Delete associated images from storage
+        // Delete associated images from public directory
         foreach ($project->images as $image) {
-            if (Storage::disk('public')->exists($image->image_path)) {
-                Storage::disk('public')->delete($image->image_path);
+            $imagePath = public_path($image->image_path);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
             }
+        }
+        
+        // Delete the project directory if it's empty
+        $projectDir = public_path("images/projects/{$project->id}");
+        if (File::exists($projectDir) && count(File::allFiles($projectDir)) == 0) {
+            File::deleteDirectory($projectDir);
         }
         
         $project->delete();
@@ -160,9 +193,10 @@ class ProjectController extends Controller
 
     public function deleteImage(ProjectImage $image)
     {
-        // Delete image file from storage
-        if (Storage::disk('public')->exists($image->image_path)) {
-            Storage::disk('public')->delete($image->image_path);
+        // Delete image file from public directory
+        $imagePath = public_path($image->image_path);
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
         }
         
         $image->delete();
